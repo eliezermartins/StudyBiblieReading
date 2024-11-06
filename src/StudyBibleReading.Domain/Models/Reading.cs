@@ -2,16 +2,16 @@
 
 public abstract class Reading
 {
-    protected Reading()
-    {
-    }
-
-    protected Reading(DateOnly startDate)
+    public Reading(DateOnly startDate)
     {
         Id = Guid.NewGuid();
         StartDate = startDate;
         EndDate = null;
         Completed = false;
+    }
+
+    protected Reading()
+    {
     }
 
     public Guid Id { get; init; }

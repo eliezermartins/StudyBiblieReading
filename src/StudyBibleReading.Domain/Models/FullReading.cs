@@ -1,10 +1,20 @@
 ﻿namespace StudyBibleReading.Domain.Models;
 
-public class FullReading(Bible bible, DateOnly startDate) : Reading(startDate)
+public class FullReading : Reading
 {
-    public Guid BibleId { get; private set; } = bible.Id;
+    public FullReading(Bible bible, DateOnly startDate) : base(startDate)
+    {
+        Bible = bible;
+        BibleId = bible.Id;
+    }
 
-    public Bible Bible { get; private set; } = bible;
+    protected FullReading()
+    {
+    }
+
+    public Guid BibleId { get; private set; }
+
+    public Bible Bible { get; private set; } = null!;
 
     public override bool CheckIfItIsCompleted()
     {

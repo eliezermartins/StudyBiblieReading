@@ -2,17 +2,26 @@
 
 namespace StudyBibleReading.Domain.Models;
 
-public class Translation(string description, string acronym, ETradition tradition)
+public class Translation
 {
-    public Guid Id { get; init; } = Guid.NewGuid();
+    public Translation(string description, string acronym, ETradition tradition)
+    {
+        Id = Guid.NewGuid();
+        Description = description;
+        Acronym = acronym;
+        Tradition = tradition;
+        Bibles = new List<Bible>();
+    }
 
-    public string Description { get; private set; } = description;
+    public Guid Id { get; init; }
 
-    public string Acronym { get; private set; } = acronym;
+    public string Description { get; private set; }
 
-    public ETradition Tradition { get; private set; } = tradition;
+    public string Acronym { get; private set; }
 
-    public ICollection<Bible> Bibles { get; private set; } = new List<Bible>();
+    public ETradition Tradition { get; private set; }
+
+    public ICollection<Bible> Bibles { get; private set; }
 
     public void Update(string description, string acronym)
     {

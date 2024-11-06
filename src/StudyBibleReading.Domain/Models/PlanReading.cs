@@ -1,10 +1,20 @@
 ﻿namespace StudyBibleReading.Domain.Models;
 
-public class PlanReading(ReadingPlan readingPlan, DateOnly startDate) : Reading(startDate)
+public class PlanReading : Reading
 {
-    public int ReadingPlanId { get; private set; }
+    public PlanReading(ReadingPlan readingPlan, DateOnly startDate) : base(startDate)
+    {
+        ReadingPlan = readingPlan;
+        ReadingPlanId = readingPlan.Id;
+    }
 
-    public ReadingPlan ReadingPlan { get; private set; } = readingPlan;
+    protected PlanReading()
+    {
+    }
+
+    public Guid ReadingPlanId { get; private set; }
+
+    public ReadingPlan ReadingPlan { get; private set; } = null!;
 
     public override bool CheckIfItIsCompleted()
     {

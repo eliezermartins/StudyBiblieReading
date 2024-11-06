@@ -13,6 +13,10 @@ public class PartialReading : Reading
         Books = books;
     }
 
+    protected PartialReading()
+    {
+    }
+
     public ICollection<Book> Books { get; private set; } = null!;
 
     public override bool CheckIfItIsCompleted()

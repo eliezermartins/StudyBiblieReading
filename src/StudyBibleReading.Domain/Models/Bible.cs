@@ -5,10 +5,6 @@ namespace StudyBibleReading.Domain.Models;
 
 public class Bible
 {
-    public Bible()
-    {
-    }
-
     public Bible(string title, Publisher publisher, Translation translation, int pages, bool study = false)
     {
         Id = Guid.NewGuid();
@@ -41,6 +37,10 @@ public class Bible
 
         Books = books;
         Readings = new List<FullReading>();
+    }
+
+    protected Bible()
+    {
     }
 
     public Guid Id { get; init; }

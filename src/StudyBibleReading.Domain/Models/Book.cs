@@ -4,10 +4,6 @@ namespace StudyBibleReading.Domain.Models;
 
 public class Book
 {
-    public Book()
-    {
-    }
-
     public Book(Bible bible, string name, int sequence, ETestament testament, EGroup classification, int numOfChapters = 0, string? abbreviation = null)
     {
         Id = Guid.NewGuid();
@@ -26,6 +22,10 @@ public class Book
         }
 
         Readings = new List<PartialReading>();
+    }
+
+    protected Book()
+    {
     }
 
     public Guid Id { get; init; }
