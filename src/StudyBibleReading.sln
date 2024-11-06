@@ -3,20 +3,47 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyBibleReading.Domain", "StudyBibleReading.Domain\StudyBibleReading.Domain.csproj", "{43A28D6D-C84A-4293-84BE-D620260C2C89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyBibleReading.Domain", "StudyBibleReading.Domain\StudyBibleReading.Domain.csproj", "{43A28D6D-C84A-4293-84BE-D620260C2C89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyBibleReading.Infra", "StudyBibleReading.Infra\StudyBibleReading.Infra.csproj", "{F564DC3B-DC18-405F-B258-F090569CD298}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyBibleReading.App", "StudyBibleReading.App\StudyBibleReading.App.csproj", "{1BD71589-A25E-42F6-9B19-B943671AE945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyBibleReading.BlazorPwa", "StudyBibleReading.BlazorPwa\StudyBibleReading.BlazorPwa.csproj", "{F5244D2F-F648-4C0C-9896-D3BA837886B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyBibleReading.WinForms", "StudyBibleReading.WinForms\StudyBibleReading.WinForms.csproj", "{2A6DB8B4-802E-48D9-801A-24FBE704643E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{43A28D6D-C84A-4293-84BE-D620260C2C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{43A28D6D-C84A-4293-84BE-D620260C2C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43A28D6D-C84A-4293-84BE-D620260C2C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43A28D6D-C84A-4293-84BE-D620260C2C89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F564DC3B-DC18-405F-B258-F090569CD298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F564DC3B-DC18-405F-B258-F090569CD298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F564DC3B-DC18-405F-B258-F090569CD298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F564DC3B-DC18-405F-B258-F090569CD298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BD71589-A25E-42F6-9B19-B943671AE945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD71589-A25E-42F6-9B19-B943671AE945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD71589-A25E-42F6-9B19-B943671AE945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD71589-A25E-42F6-9B19-B943671AE945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5244D2F-F648-4C0C-9896-D3BA837886B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5244D2F-F648-4C0C-9896-D3BA837886B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5244D2F-F648-4C0C-9896-D3BA837886B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5244D2F-F648-4C0C-9896-D3BA837886B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A6DB8B4-802E-48D9-801A-24FBE704643E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A6DB8B4-802E-48D9-801A-24FBE704643E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A6DB8B4-802E-48D9-801A-24FBE704643E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6DB8B4-802E-48D9-801A-24FBE704643E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5155266A-17DE-41C3-BACA-4832E809A787}
 	EndGlobalSection
 EndGlobal
