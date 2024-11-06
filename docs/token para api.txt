@@ -1,0 +1,6 @@
+{
+    "name": "Eliezer Martins",
+    "email": "eliezermartins@gmail.com.com",
+    "notifications": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHIiOiJUdWUgT2N0IDIyIDIwMjQgMTQ6MTI6MTggR01UKzAwMDAuZWxpZXplcm1hcnRpbnNAZ21haWwuY29tLmNvbSIsImlhdCI6MTcyOTYwNjMzOH0.yJHUA1OjnRXhb03gSvSacOHwqwSawqYfm0caZlcvduw"
+}
