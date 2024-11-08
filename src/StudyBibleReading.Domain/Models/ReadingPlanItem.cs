@@ -1,14 +1,26 @@
 ﻿namespace StudyBibleReading.Domain.Models;
 
-public class ReadingPlanItem(ReadingPlan plan, int id, DateOnly date)
+public class ReadingPlanItem
 {
-    public int Id { get; set; } = id;
+    public ReadingPlanItem(ReadingPlan plan, int id, DateOnly date)
+    {
+        Id = id;
+        ReadingPlan = plan;
+        ReadingPlanId = plan.Id;
+        Date = date;
+    }
 
-    public int ReadingPlanId { get; set; }
+    protected ReadingPlanItem()
+    {
+    }
 
-    public ReadingPlan ReadingPlan { get; set; } = plan;
+    public int Id { get; set; }
 
-    public DateOnly Date { get; set; } = date;
+    public Guid ReadingPlanId { get; set; }
+
+    public ReadingPlan ReadingPlan { get; set; } = null!;
+
+    public DateOnly Date { get; set; }
 
     public bool Read { get; set; } = false;
 }
