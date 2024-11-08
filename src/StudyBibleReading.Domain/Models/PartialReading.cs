@@ -21,6 +21,6 @@ public class PartialReading : Reading
 
     public override bool CheckIfItIsCompleted()
     {
-        return Completed = Books.All(l => l.Read);
+        return Completed = Books.All(l => l.IsRead);
     }
 }

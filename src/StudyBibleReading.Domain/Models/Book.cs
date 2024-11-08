@@ -4,7 +4,7 @@ namespace StudyBibleReading.Domain.Models;
 
 public class Book
 {
-    public Book(Bible bible, string name, int sequence, ETestament testament, EGroup classification, int numOfChapters = 0, string? abbreviation = null)
+    public Book(Bible bible, string name, int sequence, ETestament testament, EBookGroup classification, int numOfChapters = 0, string? abbreviation = null)
     {
         Id = Guid.NewGuid();
         BibleId = bible.Id;
@@ -14,11 +14,12 @@ public class Book
         Testament = testament;
         Classification = classification;
         SequenceInTheBible = sequence;
-        Chapters = new Dictionary<int, bool>();
+        ReadingQuantity = 0;
+        Chapters = new List<Chapter>();
 
         for (var i = 1; i <= numOfChapters; i++)
         {
-            Chapters.Add(i, false);
+            Chapters.Add(new Chapter(this, i));
         }
 
         Readings = new List<PartialReading>();
@@ -40,13 +41,18 @@ public class Book
 
     public ETestament Testament { get; private set; }
 
-    public EGroup Classification { get; private set; }
+    public EBookGroup Classification { get; private set; }
 
     public int SequenceInTheBible { get; private set; }
 
-    public IDictionary<int, bool> Chapters { get; private set; } = null!;
+    public ICollection<Chapter> Chapters { get; private set; } = null!;
 
     public ICollection<PartialReading> Readings { get; private set; } = null!;
 
-    public bool Read => Chapters.All(c => c.Value);
+    public int ReadingQuantity { get; private set; }
+
+    public void AddReadingQuantity()
+    {
+        ReadingQuantity++;
+    }
 }

@@ -47,8 +47,8 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
             .IsRequired()
             .HasConversion(
                 v => v.GetDescription(),
-                v => Enum.GetValues(typeof(EGroup))
-                         .Cast<EGroup>()
+                v => Enum.GetValues(typeof(EBookGroup))
+                         .Cast<EBookGroup>()
                          .FirstOrDefault(e => e.GetDescription() == v))
             .HasMaxLength(20);
 
@@ -64,7 +64,7 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         builder.HasMany(l => l.Readings)
             .WithMany(l => l.Books);
 
-        builder.Ignore(l => l.Read);
+        builder.Ignore(l => l.IsRead);
 
         builder.HasIndex(l => l.Name);
     }

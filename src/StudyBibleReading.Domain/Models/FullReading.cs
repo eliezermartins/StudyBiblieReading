@@ -18,6 +18,6 @@ public class FullReading : Reading
 
     public override bool CheckIfItIsCompleted()
     {
-        return Completed = Bible.Books.All(l => l.Read);
+        return Completed = Bible.Books.All(l => l.IsRead);
     }
 }

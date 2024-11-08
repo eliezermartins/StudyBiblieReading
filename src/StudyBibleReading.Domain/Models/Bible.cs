@@ -15,6 +15,7 @@ public class Bible
         Translation = translation;
         Pages = pages;
         Study = study;
+        ReadingQuantity = 0;
 
         List<Book> books = new();
         if (Translation.Tradition != ETradition.Other)
@@ -36,6 +37,7 @@ public class Bible
         }
 
         Books = books;
+        Articles = new List<Article>();
         Readings = new List<FullReading>();
     }
 
@@ -59,9 +61,16 @@ public class Bible
 
     public bool Study { get; private set; }
 
+    public int ReadingQuantity { get; private set; }
+
     public ICollection<Book> Books { get; private set; } = null!;
+
+    public ICollection<Article> Articles { get; private set; } = null!;
 
     public ICollection<FullReading> Readings { get; private set; } = null!;
 
-    public int ReadingQuantity => Readings.Count(l => l.Completed);
+    public void AddReadingQuantity()
+    {
+        ReadingQuantity++;
+    }
 }

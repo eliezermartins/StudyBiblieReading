@@ -2,11 +2,8 @@
 
 namespace StudyBibleReading.Domain.Enums;
 
-public enum EGroup
+public enum EBookGroup
 {
-    [Description("")]
-    None = 0,
-
     [Description("Pentateuco")]
     Pentateuch = 1,
 
@@ -39,21 +36,6 @@ public enum EGroup
 
     [Description("Apócrifo")]
     Apocryphal = 11,
-
-    [Description("Prefácio")]
-    Preface = 12,
-
-    [Description("Introdução")]
-    Introduction = 13,
-
-    [Description("Introdução de livro")]
-    BookIntroduction = 14,
-
-    [Description("Texto de apoio")]
-    SupportText = 15,
-
-    [Description("Recurso")]
-    Resource = 16,
 
     [Description("Torá")]
     Torah = 17,
