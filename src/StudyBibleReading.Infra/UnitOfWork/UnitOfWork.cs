@@ -6,13 +6,19 @@ using StudyBibleReading.Infra.Repositories;
 
 namespace StudyBibleReading.Infra.UnitOfWork;
 
-public class UnitOfWork(SbrContext context) : IUnitOfWork, IDisposable
+public class UnitOfWork(IDbContextFactory<SbrContext> contextFactory) : IUnitOfWork, IDisposable
 {
+    private readonly SbrContext context = contextFactory.CreateDbContext();
+    private bool disposed;
+
+    private ApplicationSettingRepository applicationSettingRepository = null!;
     private PublisherRepository publisherRepository = null!;
     private TranslationRepository translationRepository = null!;
     private BibleRepository bibleRepository = null!;
     private ReadingRepository readingRepository = null!;
     private ReadingPlanRepository readingPlanRepository = null!;
+
+    public ApplicationSettingRepository ApplicationSettingRepository => applicationSettingRepository ??= new ApplicationSettingRepository(context);
 
     public IPublisherRepository Publlishers => publisherRepository ??= new PublisherRepository(context);
 
@@ -29,8 +35,6 @@ public class UnitOfWork(SbrContext context) : IUnitOfWork, IDisposable
         await context.SaveChangesAsync();
     }
 
-    public void Dispose() => context.Dispose();
-
     public void UndoChanges()
     {
         if (context.ChangeTracker.Entries().Any(e => e.State != EntityState.Unchanged))
@@ -39,12 +43,12 @@ public class UnitOfWork(SbrContext context) : IUnitOfWork, IDisposable
             {
                 switch (entry.State)
                 {
+                    case EntityState.Added:
+                        entry.State = EntityState.Detached;
+                        break;
                     case EntityState.Modified:
                         entry.CurrentValues.SetValues(entry.OriginalValues);
                         entry.State = EntityState.Unchanged;
-                        break;
-                    case EntityState.Added:
-                        entry.State = EntityState.Detached;
                         break;
                     case EntityState.Deleted:
                         entry.State = EntityState.Unchanged;
@@ -52,5 +56,21 @@ public class UnitOfWork(SbrContext context) : IUnitOfWork, IDisposable
                 }
             }
         }
+    }
+
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed && disposing)
+        {
+            context.Dispose();
+        }
+
+        disposed = true;
     }
 }

@@ -16,6 +16,12 @@ public class SbrContext(DbContextOptions<SbrContext> options) : DbContext(option
 
     public DbSet<Book> Books { get; set; }
 
+    public DbSet<Article> Articles { get; set; }
+
+    public DbSet<Chapter> Chapters { get; set; }
+
+    public DbSet<Reading> Readings { get; set; }
+
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     //{
     //    base.OnConfiguring(optionsBuilder);
@@ -26,15 +32,24 @@ public class SbrContext(DbContextOptions<SbrContext> options) : DbContext(option
 
     //    optionsBuilder.UseSqlite("Data Source=StudyBibleReading.sqlite");
     //}
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new BibleConfiguration());
-        modelBuilder.ApplyConfiguration(new BookConfiguration());
+        modelBuilder.ApplyConfiguration(new ApplicationSettingConfiguration());
         modelBuilder.ApplyConfiguration(new PublisherConfiguration());
         modelBuilder.ApplyConfiguration(new TranslationConfiguration());
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppContext).Assembly);
+        modelBuilder.ApplyConfiguration(new BibleConfiguration());
+        modelBuilder.ApplyConfiguration(new BookConfiguration());
+        modelBuilder.ApplyConfiguration(new ChapterConfiguration());
+        modelBuilder.ApplyConfiguration(new ArticleConfiguration());
+        modelBuilder.ApplyConfiguration(new ReadingConfiguration());
+        modelBuilder.ApplyConfiguration(new FullReadingConfiguration());
+        modelBuilder.ApplyConfiguration(new PartialReadingConfiguration());
+        modelBuilder.ApplyConfiguration(new PlanReadingConfiguration());
+        modelBuilder.ApplyConfiguration(new ReadingPlanConfiguration());
+        modelBuilder.ApplyConfiguration(new ReadingPlanDayConfiguration());
+
+        //modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppContext).Assembly);
     }
 }

@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Newtonsoft.Json;
 using StudyBibleReading.Domain.Enums;
 using StudyBibleReading.Domain.Extentions;
 using StudyBibleReading.Domain.Models;
@@ -14,27 +12,27 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
     {
         builder.HasKey(l => new { l.Id, l.BibleId });
 
-        builder.Property(l => l.Id)
+        builder.Property(b => b.Id)
             .HasConversion(
                 guid => guid.ToString("N"), // Guid para string sem traços
                 str => Guid.Parse(str));
 
-        builder.HasOne(l => l.Bible)
+        builder.HasOne(b => b.Bible)
             .WithMany(b => b.Books)
-            .HasForeignKey(l => l.BibleId)
+            .HasForeignKey(b => b.BibleId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.Property(l => l.Name)
+        builder.Property(b => b.Name)
             .IsRequired()
             .HasMaxLength(100);
 
-        builder.Property(l => l.Abbreviation)
+        builder.Property(b => b.Abbreviation)
             .HasMaxLength(5);
 
-        builder.Property(l => l.SequenceInTheBible)
+        builder.Property(b => b.SequenceInTheBible)
             .IsRequired();
 
-        builder.Property(l => l.Testament)
+        builder.Property(b => b.Testament)
             .IsRequired()
             .HasConversion(
                 v => v.GetDescription(),
@@ -43,7 +41,7 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
                          .FirstOrDefault(e => e.GetDescription() == v))
             .HasMaxLength(20);
 
-        builder.Property(l => l.Classification)
+        builder.Property(b => b.Classification)
             .IsRequired()
             .HasConversion(
                 v => v.GetDescription(),
@@ -52,20 +50,23 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
                          .FirstOrDefault(e => e.GetDescription() == v))
             .HasMaxLength(20);
 
-        builder.Property(b => b.Chapters)
-            .HasConversion(
-                v => JsonConvert.SerializeObject(v),
-                v => JsonConvert.DeserializeObject<Dictionary<int, bool>>(v)!)
-            .Metadata.SetValueComparer(new ValueComparer<IDictionary<int, bool>>(
-                (d1, d2) => d1!.SequenceEqual(d2!), // Comparar dicionários
-                d => d.Aggregate(0, (a, v) => HashCode.Combine(a, v.Key.GetHashCode(), v.Value.GetHashCode())), // Gerar hash do dicionário
-                d => d.ToDictionary(entry => entry.Key, entry => entry.Value))); // Clonar o dicionário
+        //builder.Property(b => b.Chapters)
+        //    .HasConversion(
+        //        v => JsonConvert.SerializeObject(v),
+        //        v => JsonConvert.DeserializeObject<Dictionary<int, bool>>(v)!)
+        //    .Metadata.SetValueComparer(new ValueComparer<IDictionary<int, bool>>(
+        //        (d1, d2) => d1!.SequenceEqual(d2!), // Comparar dicionários
+        //        d => d.Aggregate(0, (a, v) => HashCode.Combine(a, v.Key.GetHashCode(), v.Value.GetHashCode())), // Gerar hash do dicionário
+        //        d => d.ToDictionary(entry => entry.Key, entry => entry.Value))); // Clonar o dicionário
+        builder.HasMany(b => b.Chapters)
+            .WithOne(b => b.Book)
+            .HasForeignKey(b => new { b.BookId, b.BibleId });
 
-        builder.HasMany(l => l.Readings)
-            .WithMany(l => l.Books);
+        builder.HasMany(b => b.Readings)
+            .WithMany(b => b.Books);
 
-        builder.Ignore(l => l.IsRead);
+        builder.Ignore(b => b.ReadingQuantity);
 
-        builder.HasIndex(l => l.Name);
+        builder.HasIndex(b => b.Name);
     }
 }

@@ -2,17 +2,24 @@
 
 namespace StudyBibleReading.Domain.Models;
 
-public class ReadingPlan(string name, string description, ETradition tradition)
+public class ReadingPlan
 {
+    public ReadingPlan(string name, string description, ETradition tradition)
+    {
+        Name = name;
+        Description = description;
+        Tradition = tradition;
+    }
+
     public Guid Id { get; set; } = Guid.NewGuid();
 
-    public string Name { get; set; } = name;
+    public string Name { get; set; }
 
-    public string Description { get; set; } = description;
+    public string Description { get; set; }
 
-    public ETradition Tradition { get; set; } = tradition;
+    public ETradition Tradition { get; set; }
 
-    public ICollection<ReadingPlanItem> Items { get; set; } = new List<ReadingPlanItem>();
+    public ICollection<ReadingPlanDay> Items { get; set; } = new List<ReadingPlanDay>();
 
     public ICollection<PlanReading> Readings { get; set; } = new List<PlanReading>();
 
@@ -58,7 +65,7 @@ public class ReadingPlan(string name, string description, ETradition tradition)
 
     public void AddItem(DateOnly date)
     {
-        Items.Add(new ReadingPlanItem(this, GetNextItemId(), date));
+        Items.Add(new ReadingPlanDay(this, GetNextItemId(), date));
     }
 
     private int GetNextItemId()

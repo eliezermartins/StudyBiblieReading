@@ -20,12 +20,12 @@ public class BibleConfiguration : IEntityTypeConfiguration<Bible>
             .HasMaxLength(150);
 
         builder.HasOne(b => b.Translation)
-            .WithMany(v => v.Bibles)
+            .WithMany(t => t.Bibles)
             .HasForeignKey(b => b.TranslationId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(b => b.Publisher)
-            .WithMany(e => e.Bibles)
+            .WithMany(p => p.Bibles)
             .HasForeignKey(b => b.PublisherId)
             .OnDelete(DeleteBehavior.Restrict);
 
@@ -35,14 +35,19 @@ public class BibleConfiguration : IEntityTypeConfiguration<Bible>
         builder.Property(b => b.Study)
             .IsRequired();
 
+        builder.Property(b => b.ReadingQuantity)
+            .IsRequired();
+
         builder.HasMany(b => b.Books)
-            .WithOne(l => l.Bible)
-            .HasForeignKey(l => l.BibleId);
+            .WithOne(b => b.Bible)
+            .HasForeignKey(b => b.BibleId);
+
+        builder.HasMany(b => b.Articles)
+            .WithOne(a => a.Bible)
+            .HasForeignKey(a => a.BibleId);
 
         builder.HasMany(b => b.Readings)
-                .WithOne(l => l.Bible)
-                .HasForeignKey(l => l.BibleId);
-
-        builder.Ignore(b => b.ReadingQuantity);
+            .WithOne(b => b.Bible)
+            .HasForeignKey(b => b.BibleId);
     }
 }

@@ -4,18 +4,18 @@ using StudyBibleReading.Infra.Context;
 
 namespace StudyBibleReading.Infra.Repositories;
 
-public class ApplicationSettingRepository(IDbContextFactory<SbrContext> db)
+public class ApplicationSettingRepository(SbrContext context)
 {
     public async Task<ApplicationSetting> GetOrAdd(string key, string defaultValue)
     {
-        await using var dbContext = await db.CreateDbContextAsync();
+        //await using var dbContext = await context.CreateDbContextAsync();
 
-        var appSetting = dbContext.ApplicationSettings.SingleOrDefault(x => x.Key == key);
+        var appSetting = await context.ApplicationSettings.SingleOrDefaultAsync(x => x.Key == key);
         if (appSetting == null)
         {
             appSetting = new ApplicationSetting { Key = key, Value = defaultValue };
-            dbContext.ApplicationSettings.Add(appSetting);
-            await dbContext.SaveChangesAsync();
+            context.ApplicationSettings.Add(appSetting);
+            //await dbContext.SaveChangesAsync();
         }
 
         return appSetting;
@@ -23,16 +23,16 @@ public class ApplicationSettingRepository(IDbContextFactory<SbrContext> db)
 
     public async Task Update(string key, string value)
     {
-        var dbContext = await db.CreateDbContextAsync();
-        var existing = dbContext.ApplicationSettings.FirstOrDefault(x => x.Key == key) ?? throw new ApplicationException($"ApplicationSetting {key} does not exist.");
+        //var dbContext = await context.CreateDbContextAsync();
+        var existing = await context.ApplicationSettings.FirstOrDefaultAsync(x => x.Key == key) ?? throw new ApplicationException($"ApplicationSetting {key} does not exist.");
         existing.Value = value;
-        await dbContext.SaveChangesAsync();
+        //await dbContext.SaveChangesAsync();
     }
 
     public async Task<ApplicationSetting> Toggle(string key)
     {
-        var dbContext = await db.CreateDbContextAsync();
-        var appSetting = dbContext.ApplicationSettings.SingleOrDefault(x => x.Key == key);
+        //var dbContext = await context.CreateDbContextAsync();
+        var appSetting = await context.ApplicationSettings.SingleOrDefaultAsync(x => x.Key == key);
 
         if (appSetting is null || bool.TryParse(appSetting.Value, out bool appSettingValue) == false)
         {
@@ -40,7 +40,7 @@ public class ApplicationSettingRepository(IDbContextFactory<SbrContext> db)
         }
 
         appSetting.Value = (!appSettingValue).ToString();
-        await dbContext.SaveChangesAsync();
+        //await dbContext.SaveChangesAsync();
 
         return appSetting;
     }

@@ -18,6 +18,6 @@ public class PlanReading : Reading
 
     public override bool CheckIfItIsCompleted()
     {
-        return Completed = ReadingPlan.Items.All(i => i.Read);
+        return Completed = ReadingPlan.Items.All(i => i.IsRead);
     }
 }

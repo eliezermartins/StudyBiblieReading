@@ -25,8 +25,8 @@ public class ReadingConfiguration : IEntityTypeConfiguration<Reading>
 
         // Configuração da herança TPH (Table-per-Hierarchy)
         builder.HasDiscriminator<string>("ReadingType")
-              .HasValue<FullReading>("Completa")
-              .HasValue<PartialReading>("Parcial")
-              .HasValue<PlanReading>("Plano");
+              .HasValue<FullReading>("Full")
+              .HasValue<PartialReading>("Partial")
+              .HasValue<PlanReading>("Plan");
     }
 }

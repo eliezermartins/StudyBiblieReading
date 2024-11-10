@@ -4,9 +4,9 @@ using StudyBibleReading.Domain.Models;
 
 namespace StudyBibleReading.Infra.Configurations;
 
-public class ReadingPlanItemConfiguration : IEntityTypeConfiguration<ReadingPlanItem>
+public class ReadingPlanDayConfiguration : IEntityTypeConfiguration<ReadingPlanDay>
 {
-    public void Configure(EntityTypeBuilder<ReadingPlanItem> builder)
+    public void Configure(EntityTypeBuilder<ReadingPlanDay> builder)
     {
         builder.HasKey(pd => new { pd.Id, pd.ReadingPlanId });
 
@@ -21,7 +21,11 @@ public class ReadingPlanItemConfiguration : IEntityTypeConfiguration<ReadingPlan
         builder.Property(pd => pd.Date)
             .IsRequired();
 
-        builder.Property(rp => rp.Read)
+        builder.Property(pd => pd.Description)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(rp => rp.IsRead)
             .IsRequired();
     }
 }
