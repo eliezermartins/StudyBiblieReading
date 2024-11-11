@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContextFactory<SbrContext>(options => options.UseSqlite("Data Source=SBRDB.sqlite3"));
+builder.Services.AddDbContextFactory<SbrContext>(options => options.UseSqlite("Data Source=../../db/SBRDB.sqlite3"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<PublisherService>();
 

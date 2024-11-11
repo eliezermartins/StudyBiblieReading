@@ -4,6 +4,8 @@ namespace StudyBibleReading.Domain.UnitOfWork;
 
 public interface IUnitOfWork
 {
+    //IApplicationSettingRepository ApplicationSettings { get; }
+
     IPublisherRepository Publlishers { get; }
 
     ITranslationRepository Translations { get; }
@@ -17,4 +19,6 @@ public interface IUnitOfWork
     Task CompleteAsync();
 
     void UndoChanges();
+
+    void Dispose();
 }

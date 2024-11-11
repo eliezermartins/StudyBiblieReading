@@ -1,6 +1,6 @@
 ﻿namespace StudyBibleReading.Domain.Repositories;
 
-public interface IRepository<T>
+public interface IBasseRepository<T>
 {
     Task<T?> GetByIdAsync(Guid id);
 

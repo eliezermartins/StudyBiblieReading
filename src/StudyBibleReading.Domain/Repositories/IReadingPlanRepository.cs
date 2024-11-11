@@ -2,6 +2,6 @@
 
 namespace StudyBibleReading.Domain.Repositories;
 
-public interface IReadingPlanRepository : IRepository<ReadingPlan>
+public interface IReadingPlanRepository : IBasseRepository<ReadingPlan>
 {
 }

@@ -11,14 +11,14 @@ public class UnitOfWork(IDbContextFactory<SbrContext> contextFactory) : IUnitOfW
     private readonly SbrContext context = contextFactory.CreateDbContext();
     private bool disposed;
 
-    private ApplicationSettingRepository applicationSettingRepository = null!;
+    //private ApplicationSettingRepository applicationSettingRepository = null!;
     private PublisherRepository publisherRepository = null!;
     private TranslationRepository translationRepository = null!;
     private BibleRepository bibleRepository = null!;
     private ReadingRepository readingRepository = null!;
     private ReadingPlanRepository readingPlanRepository = null!;
 
-    public ApplicationSettingRepository ApplicationSettingRepository => applicationSettingRepository ??= new ApplicationSettingRepository(context);
+    //public IApplicationSettingRepository ApplicationSettings => applicationSettingRepository ??= new ApplicationSettingRepository(context);
 
     public IPublisherRepository Publlishers => publisherRepository ??= new PublisherRepository(context);
 

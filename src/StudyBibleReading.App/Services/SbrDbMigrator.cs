@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudyBibleReading.Domain.Models;
+using StudyBibleReading.Infra.Context;
 
-namespace StudyBibleReading.Infra.Context
+namespace StudyBibleReading.App.Services
 {
     public class SbrDbMigrator(IDbContextFactory<SbrContext> dbContextFactory)
     {

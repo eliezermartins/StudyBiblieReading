@@ -20,7 +20,22 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task<Publisher?> Create(Publisher publisher)
+    public async Task<Publisher?> GetById(Guid id)
+    {
+        try
+        {
+            var publisher = await uow.Publlishers.GetByIdAsync(id);
+            await uow.CompleteAsync();
+            return publisher;
+        }
+        catch
+        {
+            uow.UndoChanges();
+            throw;
+        }
+    }
+
+    public async Task<Publisher> Create(Publisher publisher)
     {
         try
         {
@@ -35,11 +50,13 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task<Publisher?> Update(Publisher publisher)
+    public async Task<Publisher> Update(Publisher publisher)
     {
         try
         {
-            var result = await uow.Publlishers.Update(publisher);
+            var publisherDb = await uow.Publlishers.GetByIdAsync(publisher.Id);
+            publisherDb?.Update(publisher.Name);
+            var result = await uow.Publlishers.Update(publisherDb);
             await uow.CompleteAsync();
             return result;
         }
@@ -50,13 +67,13 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task<Publisher?> GetById(Guid id)
+    public async Task Delete(Publisher publisher)
     {
         try
         {
-            var publisher = await uow.Publlishers.GetByIdAsync(id);
+            await uow.Publlishers.Delete(publisher);
             await uow.CompleteAsync();
-            return publisher;
+            return;
         }
         catch
         {

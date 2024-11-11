@@ -1,24 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudyBibleReading.Domain.Models;
+using StudyBibleReading.Domain.Repositories;
 using StudyBibleReading.Infra.Context;
 
 namespace StudyBibleReading.Infra.Repositories;
 
-public class ApplicationSettingRepository(SbrContext context)
+public class ApplicationSettingRepository(SbrContext context) : IApplicationSettingRepository
 {
-    public async Task<ApplicationSetting> GetOrAdd(string key, string defaultValue)
+    public async Task<ApplicationSetting> Add(string key, string defaultValue)
     {
-        //await using var dbContext = await context.CreateDbContextAsync();
+        var appSetting = new ApplicationSetting { Key = key, Value = defaultValue };
+        var result = await context.ApplicationSettings.AddAsync(appSetting);
 
-        var appSetting = await context.ApplicationSettings.SingleOrDefaultAsync(x => x.Key == key);
-        if (appSetting == null)
-        {
-            appSetting = new ApplicationSetting { Key = key, Value = defaultValue };
-            context.ApplicationSettings.Add(appSetting);
-            //await dbContext.SaveChangesAsync();
-        }
+        return result.Entity;
+    }
 
-        return appSetting;
+    public Task<ApplicationSetting> GetByKey(string key)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task Update(string key, string value)
@@ -29,7 +28,7 @@ public class ApplicationSettingRepository(SbrContext context)
         //await dbContext.SaveChangesAsync();
     }
 
-    public async Task<ApplicationSetting> Toggle(string key)
+    public async Task<ApplicationSetting> Toggle(string key) //inverte o valor da chave
     {
         //var dbContext = await context.CreateDbContextAsync();
         var appSetting = await context.ApplicationSettings.SingleOrDefaultAsync(x => x.Key == key);

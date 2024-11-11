@@ -3,7 +3,7 @@ using StudyBibleReading.Infra.Context;
 
 namespace StudyBiblieReading.WebAPI.Extensions;
 
-public static class AppExtensions
+public static class DatabaseExtensions
 {
     public static WebApplication CreateDatabase(this WebApplication app)
     {
@@ -13,7 +13,7 @@ public static class AppExtensions
             try
             {
                 var context = services.GetRequiredService<SbrContext>();
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
             }
             catch (Exception ex)
             {
