@@ -9,9 +9,9 @@ public class Bible
     {
         Id = Guid.NewGuid();
         Title = title;
-        PublisherId = publisher.Id;
+        //PublisherId = publisher.Id;
         Publisher = publisher;
-        TranslationId = translation.Id;
+        //TranslationId = translation.Id;
         Translation = translation;
         Pages = pages;
         Study = study;
@@ -72,5 +72,12 @@ public class Bible
     public void AddReadingQuantity()
     {
         ReadingQuantity++;
+    }
+
+    public void Update(string title, int pages, bool study)
+    {
+        Title = title;
+        Pages = pages;
+        Study = study;
     }
 }

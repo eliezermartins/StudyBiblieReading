@@ -9,7 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -18,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextFactory<SbrContext>(options => options.UseSqlite("Data Source=../../db/SBRDB.sqlite3"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<PublisherService>();
+builder.Services.AddScoped<TranslationService>();
 
 var app = builder.Build();
 app.CreateDatabase();

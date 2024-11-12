@@ -3,13 +3,13 @@ using StudyBibleReading.Domain.UnitOfWork;
 
 namespace StudyBibleReading.App.Services;
 
-public class PublisherService(IUnitOfWork uow)
+public class BibleService(IUnitOfWork uow)
 {
-    public async Task<IEnumerable<Publisher>> GetAll()
+    public async Task<IEnumerable<Bible>> GetAll()
     {
         try
         {
-            var result = await uow.Publlishers.GetAllAsync();
+            var result = await uow.Bibles.GetAllAsync();
             await uow.CompleteAsync();
             return result;
         }
@@ -20,13 +20,13 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task<Publisher?> GetById(Guid id)
+    public async Task<Bible?> GetById(Guid id)
     {
         try
         {
-            var publisher = await uow.Publlishers.GetByIdAsync(id);
+            var bible = await uow.Bibles.GetByIdAsync(id);
             await uow.CompleteAsync();
-            return publisher;
+            return bible;
         }
         catch
         {
@@ -35,28 +35,11 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task<Publisher> Create(Publisher publisher)
+    public async Task<Bible> Create(Bible bible)
     {
         try
         {
-            var result = await uow.Publlishers.AddAsync(publisher);
-            await uow.CompleteAsync();
-            return result;
-        }
-        catch
-        {
-            uow.UndoChanges();
-            throw;
-        }
-    }
-
-    public async Task<Publisher> Update(Publisher publisher)
-    {
-        try
-        {
-            var publisherDb = await uow.Publlishers.GetByIdAsync(publisher.Id);
-            publisherDb?.Update(publisher.Name);
-            var result = await uow.Publlishers.Update(publisherDb!);
+            var result = await uow.Bibles.AddAsync(bible);
             await uow.CompleteAsync();
             return result;
         }
@@ -67,11 +50,28 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task Delete(Publisher publisher)
+    public async Task<Bible> Update(Bible bible)
     {
         try
         {
-            await uow.Publlishers.Delete(publisher);
+            var bibleDb = await uow.Bibles.GetByIdAsync(bible.Id);
+            bibleDb?.Update(bible.Title, bible.Pages, bible.Study);
+            var result = await uow.Bibles.Update(bibleDb!);
+            await uow.CompleteAsync();
+            return result;
+        }
+        catch
+        {
+            uow.UndoChanges();
+            throw;
+        }
+    }
+
+    public async Task Delete(Bible bible)
+    {
+        try
+        {
+            await uow.Bibles.Delete(bible);
             await uow.CompleteAsync();
             return;
         }

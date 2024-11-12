@@ -6,16 +6,16 @@ namespace StudyBiblieReading.WebAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PublisherController(PublisherService publisherService) : ControllerBase
+public class TranslationsController(TranslationService translationService) : ControllerBase
 {
     [HttpGet("all")]
-    [ProducesResponseType(typeof(IEnumerable<Publisher>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<Translation>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAll()
     {
         try
         {
-            var result = await publisherService.GetAll();
+            var result = await translationService.GetAll();
             return result is null ? NotFound() : Ok(result);
         }
         catch (Exception ex)
@@ -25,14 +25,14 @@ public class PublisherController(PublisherService publisherService) : Controller
         }
     }
 
-    [HttpGet("{id:guid}")]
-    [ProducesResponseType(typeof(Publisher), StatusCodes.Status200OK)]
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(Translation), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
         try
         {
-            var result = await publisherService.GetById(id);
+            var result = await translationService.GetById(id);
             return result is null ? NotFound() : Ok(result);
         }
         catch (Exception ex)
@@ -43,19 +43,19 @@ public class PublisherController(PublisherService publisherService) : Controller
     }
 
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(IEnumerable<Publisher>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<Translation>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update(Guid id, Publisher publisher)
+    public async Task<IActionResult> Update(Guid id, Translation translation)
     {
         try
         {
-            var publisherResult = await publisherService.GetById(publisher.Id);
+            var publisherResult = await translationService.GetById(translation.Id);
             if (publisherResult is null)
             {
                 return NotFound();
             }
 
-            var result = await publisherService.Update(publisher);
+            var result = await translationService.Update(translation);
             return Ok(result);
         }
         catch (Exception ex)
@@ -66,13 +66,13 @@ public class PublisherController(PublisherService publisherService) : Controller
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(Publisher), StatusCodes.Status201Created)]
-    public async Task<IActionResult> Create(Publisher publisher)
+    [ProducesResponseType(typeof(Translation), StatusCodes.Status201Created)]
+    public async Task<IActionResult> Create(Translation translation)
     {
         try
         {
-            var result = await publisherService.Create(publisher);
-            return CreatedAtAction(nameof(GetById), new { id = publisher.Id }, publisher);
+            var result = await translationService.Create(translation);
+            return CreatedAtAction(nameof(GetById), new { id = translation.Id }, translation);
         }
         catch (Exception ex)
         {
@@ -88,13 +88,13 @@ public class PublisherController(PublisherService publisherService) : Controller
     {
         try
         {
-            var publisherResult = await publisherService.GetById(id);
-            if (publisherResult is null)
+            var translationResult = await translationService.GetById(id);
+            if (translationResult is null)
             {
                 return NotFound();
             }
 
-            await publisherService.Delete(publisherResult);
+            await translationService.Delete(translationResult);
             return Ok();
         }
         catch (Exception ex)

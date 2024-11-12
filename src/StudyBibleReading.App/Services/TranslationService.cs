@@ -3,13 +3,13 @@ using StudyBibleReading.Domain.UnitOfWork;
 
 namespace StudyBibleReading.App.Services;
 
-public class PublisherService(IUnitOfWork uow)
+public class TranslationService(IUnitOfWork uow)
 {
-    public async Task<IEnumerable<Publisher>> GetAll()
+    public async Task<IEnumerable<Translation>> GetAll()
     {
         try
         {
-            var result = await uow.Publlishers.GetAllAsync();
+            var result = await uow.Translations.GetAllAsync();
             await uow.CompleteAsync();
             return result;
         }
@@ -20,11 +20,11 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task<Publisher?> GetById(Guid id)
+    public async Task<Translation?> GetById(Guid id)
     {
         try
         {
-            var publisher = await uow.Publlishers.GetByIdAsync(id);
+            var publisher = await uow.Translations.GetByIdAsync(id);
             await uow.CompleteAsync();
             return publisher;
         }
@@ -35,11 +35,11 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task<Publisher> Create(Publisher publisher)
+    public async Task<Translation> Create(Translation translation)
     {
         try
         {
-            var result = await uow.Publlishers.AddAsync(publisher);
+            var result = await uow.Translations.AddAsync(translation);
             await uow.CompleteAsync();
             return result;
         }
@@ -50,13 +50,13 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task<Publisher> Update(Publisher publisher)
+    public async Task<Translation> Update(Translation translation)
     {
         try
         {
-            var publisherDb = await uow.Publlishers.GetByIdAsync(publisher.Id);
-            publisherDb?.Update(publisher.Name);
-            var result = await uow.Publlishers.Update(publisherDb!);
+            var translationDb = await uow.Translations.GetByIdAsync(translation.Id);
+            translationDb?.Update(translation.Description, translation.Acronym);
+            var result = await uow.Translations.Update(translationDb!);
             await uow.CompleteAsync();
             return result;
         }
@@ -67,11 +67,11 @@ public class PublisherService(IUnitOfWork uow)
         }
     }
 
-    public async Task Delete(Publisher publisher)
+    public async Task Delete(Translation translation)
     {
         try
         {
-            await uow.Publlishers.Delete(publisher);
+            await uow.Translations.Delete(translation);
             await uow.CompleteAsync();
             return;
         }
