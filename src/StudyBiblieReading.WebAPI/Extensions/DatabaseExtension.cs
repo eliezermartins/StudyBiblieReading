@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using StudyBibleReading.Infra.Context;
+﻿using StudyBibleReading.Infra.Context;
 
 namespace StudyBiblieReading.WebAPI.Extensions;
 
-public static class DatabaseExtensions
+public static class DatabaseExtension
 {
     public static WebApplication CreateDatabase(this WebApplication app)
     {
@@ -17,8 +16,7 @@ public static class DatabaseExtensions
             }
             catch (Exception ex)
             {
-                var logger = services.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "Ocorreu um erro ao criar o banco de dados.");
+                Console.WriteLine(ex);
             }
         }
 

@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyBibleReading.App", "St
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyBibleReading.BlazorPwa", "StudyBibleReading.BlazorPwa\StudyBibleReading.BlazorPwa.csproj", "{F5244D2F-F648-4C0C-9896-D3BA837886B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyBibleReading.WinForms", "StudyBibleReading.WinForms\StudyBibleReading.WinForms.csproj", "{2A6DB8B4-802E-48D9-801A-24FBE704643E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudyBiblieReading.WebAPI", "StudyBiblieReading.WebAPI\StudyBiblieReading.WebAPI.csproj", "{5A7265E8-2D3E-4E06-AD8E-B924F0A96EA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyBiblieReading.WebAPI", "StudyBiblieReading.WebAPI\StudyBiblieReading.WebAPI.csproj", "{5A7265E8-2D3E-4E06-AD8E-B924F0A96EA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudyBibleReading.WinForms", "StudyBibleReading.WinForms\StudyBibleReading.WinForms.csproj", "{48BE9415-AEB4-4991-8103-8A02D2E7F2D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +37,14 @@ Global
 		{F5244D2F-F648-4C0C-9896-D3BA837886B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5244D2F-F648-4C0C-9896-D3BA837886B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5244D2F-F648-4C0C-9896-D3BA837886B1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A6DB8B4-802E-48D9-801A-24FBE704643E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A6DB8B4-802E-48D9-801A-24FBE704643E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A6DB8B4-802E-48D9-801A-24FBE704643E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A6DB8B4-802E-48D9-801A-24FBE704643E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A7265E8-2D3E-4E06-AD8E-B924F0A96EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A7265E8-2D3E-4E06-AD8E-B924F0A96EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A7265E8-2D3E-4E06-AD8E-B924F0A96EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A7265E8-2D3E-4E06-AD8E-B924F0A96EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48BE9415-AEB4-4991-8103-8A02D2E7F2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48BE9415-AEB4-4991-8103-8A02D2E7F2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48BE9415-AEB4-4991-8103-8A02D2E7F2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48BE9415-AEB4-4991-8103-8A02D2E7F2D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

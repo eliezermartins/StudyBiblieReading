@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using StudyBibleReading.App.Services;
 using StudyBibleReading.Domain.UnitOfWork;
 using StudyBibleReading.Infra.Context;
 using StudyBibleReading.Infra.UnitOfWork;
@@ -21,8 +20,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContextFactory<SbrContext>(options => options.UseSqlite("Data Source=../../db/SBRDB.sqlite3"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<PublisherService>();
-builder.Services.AddScoped<TranslationService>();
+builder.Services.AddSbrServices();
 
 var app = builder.Build();
 app.CreateDatabase();

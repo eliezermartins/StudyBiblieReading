@@ -12,4 +12,6 @@ public class Publisher(string name)
     {
         Name = name;
     }
+
+    public override string ToString() => Name;
 }

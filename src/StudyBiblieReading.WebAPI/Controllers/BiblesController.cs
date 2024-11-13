@@ -20,7 +20,11 @@ namespace StudyBiblieReading.WebAPI.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<Bible>>> GetBibles()
         {
-            return await _context.Bibles.ToListAsync();
+            return await _context.Bibles
+                .Include(x => x.Publisher)
+                .Include(x => x.Translation)
+                .Include(x => x.Books.OrderBy(x => x.SequenceInTheBible))
+                .ToListAsync();
         }
 
         // GET: api/Bibles/5

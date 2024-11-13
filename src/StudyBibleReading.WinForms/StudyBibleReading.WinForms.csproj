@@ -15,4 +15,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StudyBibleReading.App\StudyBibleReading.App.csproj" />
+    <ProjectReference Include="..\StudyBibleReading.Infra\StudyBibleReading.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -35,4 +35,6 @@ public class Translation
             Acronym = acronym;
         }
     }
+
+    public override string ToString() => Acronym;
 }
