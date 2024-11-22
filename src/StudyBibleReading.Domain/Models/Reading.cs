@@ -20,6 +20,8 @@ public abstract class Reading
 
     public DateOnly? EndDate { get; protected set; }
 
+    public DateOnly? ExpectedEndDate { get; protected set; }
+
     public bool Completed { get; protected set; }
 
     public abstract bool CheckIfItIsCompleted();
